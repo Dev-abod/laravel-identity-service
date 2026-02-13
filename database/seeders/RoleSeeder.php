@@ -10,7 +10,7 @@ class RoleSeeder extends Seeder
     {
         DB::table('roles')->insert([
             [
-                'slug' => 'Administrator',
+                'slug' => 'Admin',
                 'name' => 'مسئول',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -59,6 +59,16 @@ class RoleSeeder extends Seeder
             ],
             
             
+        ]);
+
+
+        $userId = 2;
+
+        $role = DB::table('roles')->where('slug', 'student')->first();
+
+        DB::table('user_roles')->insert([
+            'user_id' => $userId,
+            'role_id' => $role->id,
         ]);
     }
 }

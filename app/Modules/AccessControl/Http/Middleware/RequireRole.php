@@ -15,24 +15,23 @@ class RequireRole
         $this->roleService = $roleService;
     }
 
-    public function handle(Request $request, Closure $next, string $role)
-    {
-        $user = $request->user();
+    public function handle(Request $request, Closure $next, string $roles)
+{
+    $user = $request->user();
 
-        // إذا لم يكن مسجل دخول
-        if (!$user) {
-            return response()->json([
-                'message' => 'Unauthenticated'
-            ], 401);
-        }
-
-        // إذا لا يملك الدور المطلوب
-        if (!$this->roleService->userHasRole($user->id, $role)) {
-            return response()->json([
-                'message' => 'Forbidden'
-            ], 403);
-        }
-
-        return $next($request);
+    if (!$user) {
+        return response()->json(['message' => 'Unauthenticated'], 401);
     }
+
+    $rolesArray = explode('|', $roles);
+
+    foreach ($rolesArray as $role) {
+        if ($this->roleService->userHasRole($user->id, $role)) {
+            return $next($request);
+        }
+    }
+
+    return response()->json(['message' => 'Forbidden'], 403);
+}
+
 }

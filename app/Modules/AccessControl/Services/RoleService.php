@@ -14,4 +14,13 @@ class RoleService
             ->where('roles.slug', $roleSlug)
             ->exists();
     }
+
+    public function getUserRoles(int $userId): array
+    {
+        return DB::table('user_roles')
+            ->join('roles', 'roles.id', '=', 'user_roles.role_id')
+            ->where('user_roles.user_id', $userId)
+            ->pluck('roles.slug')
+            ->toArray();
+    }
 }

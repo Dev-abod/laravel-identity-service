@@ -1,16 +1,11 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum'])->group(function () {
 
-    Route::middleware('role:admin')->prefix('admin')->group(function () {
-        Route::get('/dashboard', fn () => response()->json([
-            'role' => 'admin',
-            'message' => 'Admin access granted'
-        ]));
-    });
-
+    // =============================
+    // Student
+    // =============================
     Route::middleware('role:student')->prefix('student')->group(function () {
         Route::get('/dashboard', fn () => response()->json([
             'role' => 'student',
@@ -18,6 +13,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         ]));
     });
 
+    // =============================
+    // Supervisor
+    // =============================
     Route::middleware('role:supervisor')->prefix('supervisor')->group(function () {
         Route::get('/dashboard', fn () => response()->json([
             'role' => 'supervisor',
@@ -25,6 +23,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         ]));
     });
 
+    // =============================
+    // Project Committee
+    // =============================
     Route::middleware('role:project_committee')->prefix('committee')->group(function () {
         Route::get('/dashboard', fn () => response()->json([
             'role' => 'project_committee',
@@ -32,6 +33,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         ]));
     });
 
+    // =============================
+    // Head of Department
+    // =============================
     Route::middleware('role:head_of_department')->prefix('hod')->group(function () {
         Route::get('/dashboard', fn () => response()->json([
             'role' => 'head_of_department',
@@ -39,6 +43,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         ]));
     });
 
+    // =============================
+    // College Admin
+    // =============================
     Route::middleware('role:college_admin')->prefix('college')->group(function () {
         Route::get('/dashboard', fn () => response()->json([
             'role' => 'college_admin',
@@ -46,6 +53,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         ]));
     });
 
+    // =============================
+    // University Presidency
+    // =============================
     Route::middleware('role:university_presidency')->prefix('presidency')->group(function () {
         Route::get('/dashboard', fn () => response()->json([
             'role' => 'university_presidency',
@@ -53,6 +63,19 @@ Route::middleware(['auth:sanctum'])->group(function () {
         ]));
     });
 
+    // =============================
+    // Admin
+    // =============================
+    Route::middleware('role:admin')->prefix('admin')->group(function () {
+        Route::get('/dashboard', fn () => response()->json([
+            'role' => 'admin',
+            'message' => 'Admin access granted'
+        ]));
+    });
+
+    // =============================
+    // Guest
+    // =============================
     Route::middleware('role:guest')->prefix('guest')->group(function () {
         Route::get('/dashboard', fn () => response()->json([
             'role' => 'guest',
