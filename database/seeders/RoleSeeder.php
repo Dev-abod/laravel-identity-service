@@ -47,7 +47,7 @@ class RoleSeeder extends Seeder
             ],
              [
                 'slug'  => 'university_presidency',
-                'snameg' => 'رئاسة الجامعة',
+                'name' => 'رئاسة الجامعة',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
