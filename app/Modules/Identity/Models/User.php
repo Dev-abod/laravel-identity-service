@@ -8,6 +8,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Modules\UserManagement\Models\StudentProfile;
+use App\Modules\UserManagement\Models\StaffProfile;
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, Notifiable;
@@ -38,4 +41,16 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+    public function studentProfile()
+{
+    return $this->hasOne(StudentProfile::class);
+}
+
+public function staffProfile()
+{
+    return $this->hasOne(StaffProfile::class);
+}
+
+
 }
